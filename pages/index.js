@@ -1,141 +1,63 @@
 import Head from "next/head";
-import axios from "axios";
 import { useState } from "react";
-
+import axios from "axios";
 import {
   Box,
   Button,
   Container,
   FormControl,
+  FormHelperText,
   FormLabel,
   Heading,
   Input,
-  Select,
-  useToast,
-  Tabs,
-  Tab,
-  TabList,
-  TabPanels,
-  TabPanel,
-  Checkbox,
-  CheckboxGroup,
-  Stack
+  InputGroup,
+  InputLeftElement,
+  Link,
+  useToast
 } from "@chakra-ui/react";
+import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-json";
 import "prismjs/themes/prism-tomorrow.css";
 
-import DiscordBot from "@components/DiscordBot";
-import CourierTenant from "@components/CourierTenant";
-
-export default function Home() {
+export default function Twitter() {
   const toast = useToast();
-  const [bot, setBot] = useState();
-  const [server, setServer] = useState("");
-  const [channels, setChannels] = useState([]);
-  const [members, setMemebers] = useState([]);
-  const [tenant, setTenant] = useState();
-  const [profile, setProfile] = useState();
   const [recipientId, setRecipientId] = useState("");
-  const [recipients, setRecipients] = useState([]);
-  const [tabIndex, setTabIndex] = useState(0);
-  const [checkRecipients, setCheckedRecipients] = useState([]);
-  const [list, setList] = useState("");
-
-  const handleTabsChange = async (index) => {
-    if (index === 0) {
-      if (channels.length === 0) {
-        const { data } = await axios.post(`/api/discord/listChannels`, {
-          botToken: bot.botToken,
-          guildId: server
-        });
-
-        setChannels(data);
-      }
-    } else if (index === 1) {
-      if (members.length === 0) {
-        const { data } = await axios.post(`/api/discord/listMembers`, {
-          botToken: bot.botToken,
-          guildId: server
-        });
-
-        setMemebers(data);
-      }
-    }
-    setProfile(null);
-    setTabIndex(index);
+  const [authToken, setAuthToken] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const profile = {
+    ...(email.length > 0 && { email }),
+    ...(phoneNumber.length > 0 && { phone_number: phoneNumber })
   };
-
-  const handleServerChange = async (e) => {
-    const guildId = e.target.value;
-    setServer(e.target.value);
-    if (guildId) {
-      const { data } = await axios.post(`/api/discord/listChannels`, {
-        botToken: bot.botToken,
-        guildId
-      });
-
-      setChannels(data);
-    } else {
-      setTabIndex(0);
-      setProfile(null);
-      setChannels([]);
-      setMemebers([]);
-    }
-  };
-
-  const handleChannelChange = async (e) => {
-    setProfile({
-      discord: { channel_id: e.target.value }
-    });
-  };
-
-  const handleMemberChange = async (e) => {
-    setProfile({
-      discord: { user_id: e.target.value }
-    });
-  };
-
-  const onRecipientIdChange = (e) => setRecipientId(e.target.value);
 
   const handleProfileSave = async (e) => {
-    const { data } = await axios.post(`/api/courier/saveProfile`, {
-      authToken: tenant.authToken,
-      recipientId,
-      profile
-    });
-    const filtered = recipients.filter(
-      (recipient) => recipient.recipientId !== recipientId
-    );
-    setRecipients([...filtered, data]);
-    toast({
-      title: "Profile saved.",
-      description: "We've created the profile for you.",
-      status: "success",
-      duration: 9000,
-      isClosable: true
-    });
-  };
-
-  const onRecipientsChanged = (value) => setCheckedRecipients(value);
-
-  const onListChanged = (e) => setList(e.target.value);
-
-  const handleSubscribe = async (e) => {
-    if (list && checkRecipients) {
-      await axios.post(`/api/courier/subscribe`, {
-        authToken: tenant.authToken,
-        list,
-        recipientIds: checkRecipients
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(`/api/courier/saveProfile`, {
+        authToken,
+        recipientId,
+        profile
       });
       toast({
-        title: "List updated.",
-        description: "We've subscribed the recipients to the list.",
+        title: "Profile saved.",
+        description: "We've created the profile for you.",
         status: "success",
         duration: 9000,
-        isClosable: true
+        isClosable: true,
+        position: "top-right"
+      });
+    } catch (err) {
+      console.log(err);
+      toast({
+        title: "Unable to save Profile.",
+        description: "We were uanble to create the profile for you.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top-right"
       });
     }
   };
@@ -143,136 +65,84 @@ export default function Home() {
   return (
     <Container>
       <Head>
-        <title>Courier Profile-inator</title>
+        <title>Courier Profile-inator: Starter</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Heading as="h1">Courier Profile-inator</Heading>
-        <p className="description">Generate Discord Profiles for Courier.</p>
-        <DiscordBot bot={bot} setBot={setBot} />
-        {bot && (
-          <div>
-            <Select placeholder="Select Server" onChange={handleServerChange}>
-              {bot.guilds.map((guild) => {
-                return (
-                  <option key={guild.id} value={guild.id}>
-                    {guild.name}
-                  </option>
-                );
-              })}
-            </Select>
-            {server && (
-              <Tabs isLazy index={tabIndex} onChange={handleTabsChange}>
-                <TabList>
-                  <Tab>Channels</Tab>
-                  <Tab>Users</Tab>
-                </TabList>
-                <TabPanels>
-                  <TabPanel>
-                    <Select
-                      placeholder="Select Channel"
-                      onChange={handleChannelChange}
-                    >
-                      {channels
-                        .filter((channel) => {
-                          return channel.type === 0;
-                        })
-                        .map((channel) => {
-                          return (
-                            <option key={channel.id} value={channel.id}>
-                              # {channel.name}
-                            </option>
-                          );
-                        })}
-                    </Select>
-                  </TabPanel>
-                  <TabPanel>
-                    <Select
-                      placeholder="Select User"
-                      onChange={handleMemberChange}
-                    >
-                      {members.map((member) => {
-                        return (
-                          <option key={member.user.id} value={member.user.id}>
-                            {member.nick || member.user.username} (
-                            {member.user.username}#{member.user.discriminator})
-                          </option>
-                        );
-                      })}
-                    </Select>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
-            )}
-
-            {profile && (
-              <>
-                <Box rounded="8px" my="8" bg="#011627">
-                  <Editor
-                    value={JSON.stringify(profile, null, 2)}
-                    highlight={(code) =>
-                      highlight(code, Prism.languages.json, "json")
-                    }
-                    padding={10}
-                    style={{
-                      fontFamily: '"Fira code", "Fira Mono", monospace',
-                      fontSize: 12
-                    }}
-                  />
-                </Box>
-                <CourierTenant tenant={tenant} setTenant={setTenant} />
-                {tenant && (
-                  <FormControl>
-                    <FormLabel>Recipient Id</FormLabel>
-                    <Input onChange={onRecipientIdChange} value={recipientId} />
-                    <Button
-                      type="button"
-                      onClick={handleProfileSave}
-                      colorScheme="blue"
-                    >
-                      Save Profile
-                    </Button>
-                  </FormControl>
-                )}
-                {tenant && recipients.length > 0 && (
-                  <div>
-                    <h2>Recipients</h2>
-                    <CheckboxGroup onChange={onRecipientsChanged}>
-                      <Stack>
-                        {recipients.map((recipient) => {
-                          return (
-                            <Checkbox
-                              value={recipient.recipientId}
-                              key={recipient.recipientId}
-                            >
-                              {recipient.recipientId}
-                            </Checkbox>
-                          );
-                        })}
-                      </Stack>
-                    </CheckboxGroup>
-                    <Select placeholder="Select List" onChange={onListChanged}>
-                      {tenant.lists.map((list) => {
-                        return (
-                          <option key={list.id} value={list.id}>
-                            {list.name || list.id}
-                          </option>
-                        );
-                      })}
-                    </Select>
-                    <Button
-                      type="button"
-                      onClick={handleSubscribe}
-                      colorScheme="blue"
-                    >
-                      Add to List
-                    </Button>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-        )}
+        <Heading as="h1" marginBottom="4">
+          Create your Profile
+        </Heading>
+        <form onSubmit={handleProfileSave}>
+          <FormControl isRequired>
+            <FormLabel>Courier Auth Token</FormLabel>
+            <Input
+              type="password"
+              onChange={(event) => setAuthToken(event.currentTarget.value)}
+              value={authToken}
+            />
+            <FormHelperText>
+              You can find this in the Courier App under{" "}
+              <Link
+                as="a"
+                href="https://app.courier.com/settings/api-keys"
+                isExternal
+              >
+                Settings &gt; API Keys
+              </Link>
+            </FormHelperText>
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel>Recipient Id</FormLabel>
+            <Input
+              onChange={(event) => setRecipientId(event.currentTarget.value)}
+              value={recipientId}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Email</FormLabel>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<EmailIcon color="gray.300" />}
+              />
+              <Input
+                type="email"
+                onChange={(event) => setEmail(event.currentTarget.value)}
+                value={email}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Phone Number</FormLabel>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<PhoneIcon color="gray.300" />}
+              />
+              <Input
+                type="tel"
+                onChange={(event) => setPhoneNumber(event.currentTarget.value)}
+                value={phoneNumber}
+              />
+            </InputGroup>
+          </FormControl>
+          <Box rounded="8px" my="8" bg="#011627">
+            <Editor
+              value={JSON.stringify(profile, null, 2)}
+              highlight={(code) =>
+                highlight(code, Prism.languages.json, "json")
+              }
+              padding={10}
+              style={{
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 12
+              }}
+            />
+          </Box>
+          <Button type="submit" colorScheme="blue">
+            Save Profile
+          </Button>
+        </form>
       </main>
     </Container>
   );
