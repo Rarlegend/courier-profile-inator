@@ -15,7 +15,7 @@ import {
   Link,
   useToast
 } from "@chakra-ui/react";
-import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
+import { EmailIcon, PhoneIcon, UnlockIcon, BellIcon } from "@chakra-ui/icons";
 
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
@@ -28,10 +28,24 @@ export default function Twitter() {
   const [authToken, setAuthToken] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [accessToken, setAccessToken] = useState("");
+  const [channelId, setChannelId] = useState("");
+  const [slack, setSlack] = useState({
+    "access_token": "",
+    "channel": ""
+  });
   const profile = {
     ...(email.length > 0 && { email }),
-    ...(phoneNumber.length > 0 && { phone_number: phoneNumber })
+    ...(phoneNumber.length > 0 && { phone_number: phoneNumber }),
+    ...(accessToken.length > 0 && channelId.length > 0 && { slack: slack })
   };
+
+  if (accessToken || channelId){
+    profile.slack = {
+      "access_token": accessToken,
+      "channel": channelId
+    }
+  }
 
   const handleProfileSave = async (e) => {
     e.preventDefault();
@@ -123,6 +137,34 @@ export default function Twitter() {
                 type="tel"
                 onChange={(event) => setPhoneNumber(event.currentTarget.value)}
                 value={phoneNumber}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Slack Access Token</FormLabel>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<UnlockIcon color="gray.300" />}
+              />
+              <Input
+                type="text"
+                onChange={(event) => setAccessToken(event.currentTarget.value)}
+                value={accessToken}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Channel ID</FormLabel>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<BellIcon color="gray.300" />}
+              />
+              <Input
+                type="text"
+                onChange={(event) => setChannelId(event.currentTarget.value)}
+                value={channelId}
               />
             </InputGroup>
           </FormControl>
