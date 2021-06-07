@@ -63,11 +63,17 @@ export default function Twitter() {
         isClosable: true,
         position: "top-right"
       });
+      console.log(authToken);
+      console.log(recipientId);
+      console.log(profile);
     } catch (err) {
       console.log(err);
+      console.log(authToken);
+      console.log(recipientId);
+      console.log(profile);
       toast({
         title: "Unable to save Profile.",
-        description: "We were uanble to create the profile for you.",
+        description: "We were unable to create the profile for you.",
         status: "error",
         duration: 9000,
         isClosable: true,
