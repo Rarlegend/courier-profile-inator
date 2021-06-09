@@ -26,7 +26,7 @@ async function handler(req, res) {
 
 /***/ }),
 
-/***/ 9670:
+/***/ 8036:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "default": function() { return /* binding */ next_serverless_loaderpage_2Fapi_2Ftwitter_2Fauth_absolutePagePath_private_next_pages_2Fapi_2Ftwitter_2Fauth_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_absolute404Path_distDir_private_dot_next_buildId_iTvgECvOi06XlY25ORgxo_assetPrefix_generateEtags_true_poweredByHeader_true_canonicalBase_basePath_runtimeConfig_previewProps_7B_22previewModeId_22_3A_225db5c33d965062916d5aa68a6738bd7a_22_2C_22previewModeSigningKey_22_3A_2239980a430360f5ae1a7eff4dd5e89eb93e55f0191216dc8dcb4dd6faf8dbb51a_22_2C_22previewModeEncryptionKey_22_3A_229f7e588c7b24d983a49b574a2af1fc0663013da8d378b4146caf04ff4b0e3ccc_22_7D_loadedEnvFiles_W10_3D_i18n_; }
+  "default": function() { return /* binding */ next_serverless_loaderpage_2Fapi_2Ftwitter_2Fauth_absolutePagePath_private_next_pages_2Fapi_2Ftwitter_2Fauth_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_absolute404Path_distDir_private_dot_next_buildId_G3jEnIT1vm28olI0FyN1L_assetPrefix_generateEtags_true_poweredByHeader_true_canonicalBase_basePath_runtimeConfig_previewProps_7B_22previewModeId_22_3A_22a8a4f7d415af3544902d4127ea970826_22_2C_22previewModeSigningKey_22_3A_220c998e149a2a0ebcb3e24667b89c2365293f63938b9d755fbef56301e1e20e5e_22_2C_22previewModeEncryptionKey_22_3A_22727a9e4c40f26442dedf1875450367a0078d49dae5c71f11c86104c1dc464172_22_7D_loadedEnvFiles_W10_3D_i18n_; }
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/next-server/server/node-polyfill-fetch.js
@@ -44,7 +44,7 @@ var node_polyfill_fetch = __webpack_require__(3660);
 var routes_manifest_namespaceObject = {"Dg":[]};
 // EXTERNAL MODULE: ./node_modules/next/dist/build/webpack/loaders/next-serverless-loader/api-handler.js
 var api_handler = __webpack_require__(8277);
-;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-serverless-loader/index.js?page=%2Fapi%2Ftwitter%2Fauth&absolutePagePath=private-next-pages%2Fapi%2Ftwitter%2Fauth.js&absoluteAppPath=private-next-pages%2F_app.js&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&absoluteErrorPath=next%2Fdist%2Fpages%2F_error&absolute404Path=&distDir=private-dot-next&buildId=iTvgECvOi06XlY25ORgxo&assetPrefix=&generateEtags=true&poweredByHeader=true&canonicalBase=&basePath=&runtimeConfig=&previewProps=%7B%22previewModeId%22%3A%225db5c33d965062916d5aa68a6738bd7a%22%2C%22previewModeSigningKey%22%3A%2239980a430360f5ae1a7eff4dd5e89eb93e55f0191216dc8dcb4dd6faf8dbb51a%22%2C%22previewModeEncryptionKey%22%3A%229f7e588c7b24d983a49b574a2af1fc0663013da8d378b4146caf04ff4b0e3ccc%22%7D&loadedEnvFiles=W10%3D&i18n=!
+;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-serverless-loader/index.js?page=%2Fapi%2Ftwitter%2Fauth&absolutePagePath=private-next-pages%2Fapi%2Ftwitter%2Fauth.js&absoluteAppPath=private-next-pages%2F_app.js&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&absoluteErrorPath=next%2Fdist%2Fpages%2F_error&absolute404Path=&distDir=private-dot-next&buildId=G3jEnIT1vm28olI0FyN1L&assetPrefix=&generateEtags=true&poweredByHeader=true&canonicalBase=&basePath=&runtimeConfig=&previewProps=%7B%22previewModeId%22%3A%22a8a4f7d415af3544902d4127ea970826%22%2C%22previewModeSigningKey%22%3A%220c998e149a2a0ebcb3e24667b89c2365293f63938b9d755fbef56301e1e20e5e%22%2C%22previewModeEncryptionKey%22%3A%22727a9e4c40f26442dedf1875450367a0078d49dae5c71f11c86104c1dc464172%22%7D&loadedEnvFiles=W10%3D&i18n=!
 
         
       const { processEnv } = __webpack_require__(2333)
@@ -74,9 +74,9 @@ var api_handler = __webpack_require__(8277);
           page: "/api/twitter/auth",
           basePath: "",
           pageIsDynamic: false,
-          encodedPreviewProps: {previewModeId:"5db5c33d965062916d5aa68a6738bd7a",previewModeSigningKey:"39980a430360f5ae1a7eff4dd5e89eb93e55f0191216dc8dcb4dd6faf8dbb51a",previewModeEncryptionKey:"9f7e588c7b24d983a49b574a2af1fc0663013da8d378b4146caf04ff4b0e3ccc"}
+          encodedPreviewProps: {previewModeId:"a8a4f7d415af3544902d4127ea970826",previewModeSigningKey:"0c998e149a2a0ebcb3e24667b89c2365293f63938b9d755fbef56301e1e20e5e",previewModeEncryptionKey:"727a9e4c40f26442dedf1875450367a0078d49dae5c71f11c86104c1dc464172"}
         })
-        /* harmony default export */ var next_serverless_loaderpage_2Fapi_2Ftwitter_2Fauth_absolutePagePath_private_next_pages_2Fapi_2Ftwitter_2Fauth_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_absolute404Path_distDir_private_dot_next_buildId_iTvgECvOi06XlY25ORgxo_assetPrefix_generateEtags_true_poweredByHeader_true_canonicalBase_basePath_runtimeConfig_previewProps_7B_22previewModeId_22_3A_225db5c33d965062916d5aa68a6738bd7a_22_2C_22previewModeSigningKey_22_3A_2239980a430360f5ae1a7eff4dd5e89eb93e55f0191216dc8dcb4dd6faf8dbb51a_22_2C_22previewModeEncryptionKey_22_3A_229f7e588c7b24d983a49b574a2af1fc0663013da8d378b4146caf04ff4b0e3ccc_22_7D_loadedEnvFiles_W10_3D_i18n_ = (apiHandler);
+        /* harmony default export */ var next_serverless_loaderpage_2Fapi_2Ftwitter_2Fauth_absolutePagePath_private_next_pages_2Fapi_2Ftwitter_2Fauth_js_absoluteAppPath_private_next_pages_2F_app_js_absoluteDocumentPath_next_2Fdist_2Fpages_2F_document_absoluteErrorPath_next_2Fdist_2Fpages_2F_error_absolute404Path_distDir_private_dot_next_buildId_G3jEnIT1vm28olI0FyN1L_assetPrefix_generateEtags_true_poweredByHeader_true_canonicalBase_basePath_runtimeConfig_previewProps_7B_22previewModeId_22_3A_22a8a4f7d415af3544902d4127ea970826_22_2C_22previewModeSigningKey_22_3A_220c998e149a2a0ebcb3e24667b89c2365293f63938b9d755fbef56301e1e20e5e_22_2C_22previewModeEncryptionKey_22_3A_22727a9e4c40f26442dedf1875450367a0078d49dae5c71f11c86104c1dc464172_22_7D_loadedEnvFiles_W10_3D_i18n_ = (apiHandler);
       
 
 /***/ }),
@@ -239,7 +239,7 @@ module.exports = require("zlib");;
 /******/ 	__webpack_require__.x = function() {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [748,947,774,363], function() { return __webpack_require__(9670); })
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [748,947,774,363], function() { return __webpack_require__(8036); })
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};
